@@ -1,10 +1,11 @@
 /*
 Instructions: 
-
-#1 - Create a filter for your Grabpay statements on Gmail and find the label name from the search bar on Gmail.com (e.g label:banks-grabpay-statement)
+#1 - Visit https://script.google.com to create a new project
+#2 - Create a filter for your Grabpay statements on Gmail and find the label name from the search bar on Gmail.com (e.g label:banks-grabpay-statement)
      and copy the value after label: and put into var label.
-#2 - Create a new Google Sheet and get the Sheet ID via the URL and replace the value in var sheet
-#3 - Find the name of the Google Sheets Tab and replace into the val tab 
+#3 - Create a new Google Sheet and get the Sheet ID via the URL and replace the value in var sheet
+#4 - Find the name of the Google Sheets Tab and replace into the val tab 
+#5 - Run function extractEmails to start
 
 You can create trigger to run this daily
 */
