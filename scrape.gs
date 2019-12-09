@@ -15,6 +15,7 @@ var label = "XXXXXXX";
 var sheet = SpreadsheetApp.openById("XXXXXXXXXXXXXXXXXX");
 var tab = sheet.getSheetByName("XXXXXX");  
 
+
 // extract emails from label in Gmail
 function extractEmails() {
 
@@ -36,9 +37,6 @@ function extractTable(message){
   
   var bodyRegex = new RegExp('<table style="border-collapse: collapse;">[\\s\\S]*</table>');
   var messageBody = bodyRegex.exec(rawMessage);
-  
-  var bodyRegex = new RegExp('<tr style="border-color: #666666; border-bottom: 1px solid grey;">[\\s\\S]*</tr>');
-  var messageBody = bodyRegex.exec(messageBody);
   
   var re = new RegExp('<p style="line-height: 15px; margin-bottom: 0px; color: #666666; font-family: \'Open Sans\', \'Helvetica Neue\', Helvetica, Arial, sans-serif; font-size: 12px; font-weight: normal; text-align: left; margin: 10px 0; padding: 0; mso-line-height-rule: exactly; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;">(.*?)</p>', 'g');
   var matches;     
@@ -80,15 +78,23 @@ function extractTable(message){
 function insertIntoSheets(data){
   for each(var row in data){
     if(row.length != 0){
-      Logger.log(row[1]);
-      Logger.log(findInColumn("B",row[1]));
-      
-      if(findInColumn("B",row[1]) == -1)
+      var dateTime = convertStringtoDateTime(row[0])
+      row.shift();
+      row = dateTime.concat(row);
+    
+      if(findInColumn("C",row[1]) == -1){
         tab.appendRow(row);
+      }
     }
   }
 }
 
+function convertStringtoDateTime(data){
+  var date = data.substring(0, 11);
+  var time = data.substring(12, data.length);
+  
+  return [date, time];
+}
 
 function findInColumn(column, data) {
   var column = sheet.getRange(column + ":" + column);  // like A:A
@@ -106,4 +112,3 @@ function findInColumn(column, data) {
     return -1;
     
 }
-
