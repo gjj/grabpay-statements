@@ -82,7 +82,7 @@ function insertIntoSheets(data){
       row.shift();
       row = dateTime.concat(row);
     
-      if(findInColumn("C",row[1]) == -1){
+      if(findInColumn("C",row[2]) == -1){
         tab.appendRow(row);
       }
     }
